@@ -5,9 +5,7 @@ import com.work.SkillClash.service.MainOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +22,10 @@ public class MainOperationsController {
         return new ResponseEntity<>(listQue,HttpStatus.OK);
     }
 
+    @PostMapping
+    public ResponseEntity<String> sendAns(@RequestBody String qId,String ans){
+
+        return new ResponseEntity("Correct",HttpStatus.OK);
+    }
 
 }
