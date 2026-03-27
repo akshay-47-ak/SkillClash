@@ -18,15 +18,6 @@ public class MainOperationsController {
     @Autowired
     MainOperationService mainOperationService;
 
-/*
-    @GetMapping
-    public ResponseEntity<List<Player>> getAllPlayers(){
-        List<Player> list = playerService.getAllPlayers();
-
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-*/
-
     @GetMapping("/getQue")
     public ResponseEntity<List<QuestionsModel>> getQuestions(){
        List<QuestionsModel> listQue = mainOperationService.generateQuestions();

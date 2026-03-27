@@ -2,21 +2,25 @@ package com.work.SkillClash.service;
 
 import com.work.SkillClash.model.Options;
 import com.work.SkillClash.model.QuestionsModel;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class MainOperationServiceImpl implements MainOperationService{
 
-    Options options1 = Options.builder()
-            .option1("java virtual machine")
-            .option2("java Vision Machine")
-            .build();
 
-    QuestionsModel questionsModel =  QuestionsModel.builder()
+    List<Options> options1 = List.of(
+            new Options("A","Java Virtual Machine"),
+            new Options("B","Java VISION MACHINE")
+    );
+
+
+    QuestionsModel questionsModel = QuestionsModel.builder()
             .id("q1")
             .questionText("What is JVM")
-            .optionsList((List<Options>) options1)
+            .optionsList(options1)
             .build();
 
     @Override
