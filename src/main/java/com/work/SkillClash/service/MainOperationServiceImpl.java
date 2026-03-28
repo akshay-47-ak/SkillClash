@@ -31,4 +31,9 @@ public class MainOperationServiceImpl implements MainOperationService{
 
         return listOfQue;
     }
+
+    @Override
+    public boolean checkAnsCorrect(String qId, String ans) {
+        return false;
+    }
 }

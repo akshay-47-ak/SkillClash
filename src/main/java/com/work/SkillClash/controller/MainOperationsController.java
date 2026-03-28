@@ -25,6 +25,8 @@ public class MainOperationsController {
     @PostMapping
     public ResponseEntity<String> sendAns(@RequestBody String qId,String ans){
 
+        boolean isCorrect = mainOperationService.checkAnsCorrect(qId,ans);
+
         return new ResponseEntity("Correct",HttpStatus.OK);
     }
 
