@@ -22,6 +22,11 @@ public class MainOperationServiceImpl implements MainOperationService{
             new Options("B","Java VISION MACHINE")
     );
 
+    List<Options> options2 = List.of(
+            new Options("A","Wrapper Class"),
+            new Options("B","DataType")
+    );
+
 
     QuestionsModel questionsModel = QuestionsModel.builder()
             .id("q1")
@@ -29,6 +34,13 @@ public class MainOperationServiceImpl implements MainOperationService{
             .optionsList(options1)
             .answer("A")
             .build();
+    QuestionsModel questionsModel1 = QuestionsModel.builder()
+            .id("q2")
+            .questionText("What is Integer")
+            .optionsList(options2)
+            .answer("A")
+            .build();
+
 
 
     @Override
@@ -41,6 +53,13 @@ public class MainOperationServiceImpl implements MainOperationService{
                 .optionsList(questionsModel.getOptionsList())
                 .build();
 
+        QuestionRequest queRes1 = QuestionRequest.builder()
+                .id(questionsModel1.getId())
+                .questionText(questionsModel1.getQuestionText())
+                .optionsList(questionsModel1.getOptionsList())
+                .build();
+
+
         listOfQue.add(queRes);
 
         return listOfQue;
@@ -49,7 +68,7 @@ public class MainOperationServiceImpl implements MainOperationService{
     @Override
     public boolean checkAnsCorrect(String qId,String ans) {
         ansMap.put(questionsModel.getId(),questionsModel.getAnswer());
-
+        ansMap.put(questionsModel1.getId(),questionsModel1.getAnswer());
            String Correctans = ansMap.get(qId);
            if(ans.equals(Correctans)){
                return true;
