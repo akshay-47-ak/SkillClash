@@ -6,12 +6,17 @@ import com.work.SkillClash.model.QuestionsModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MainOperationServiceImpl implements MainOperationService{
 
     List<QuestionRequest> listOfQue = new ArrayList<>();
+
+    Map<String,String> ansMap = new HashMap<>();
+
     List<Options> options1 = List.of(
             new Options("A","Java Virtual Machine"),
             new Options("B","Java VISION MACHINE")
@@ -24,6 +29,7 @@ public class MainOperationServiceImpl implements MainOperationService{
             .optionsList(options1)
             .answer("A")
             .build();
+
 
     @Override
     public List<QuestionRequest> generateQuestions() {
@@ -41,8 +47,10 @@ public class MainOperationServiceImpl implements MainOperationService{
     }
 
     @Override
-    public boolean checkAnsCorrect(String ans) {
-           String Correctans = questionsModel.getAnswer();
+    public boolean checkAnsCorrect(String qId,String ans) {
+        ansMap.put(questionsModel.getId(),questionsModel.getAnswer());
+
+           String Correctans = ansMap.get(qId);
            if(ans.equals(Correctans)){
                return true;
            }

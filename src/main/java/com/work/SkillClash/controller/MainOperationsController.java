@@ -27,8 +27,9 @@ public class MainOperationsController {
     public ResponseEntity<String> sendAns(@RequestBody AnswerResponse answerResponse){
 
               String ans = answerResponse.getAns();
+              String qId = answerResponse.getQId();
 
-        boolean isCorrect = mainOperationService.checkAnsCorrect(ans);
+        boolean isCorrect = mainOperationService.checkAnsCorrect(qId,ans);
         if(isCorrect){
             return new ResponseEntity("Correct",HttpStatus.OK);
         }

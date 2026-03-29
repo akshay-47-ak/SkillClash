@@ -7,5 +7,5 @@ import java.util.List;
 public interface MainOperationService {
     List<QuestionRequest> generateQuestions();
 
-    boolean checkAnsCorrect(String ans);
+    boolean checkAnsCorrect(String qId,String ans);
 }
