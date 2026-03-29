@@ -1,5 +1,6 @@
 package com.work.SkillClash.controller;
 
+import com.work.SkillClash.dto.QuestionResponse;
 import com.work.SkillClash.model.QuestionsModel;
 import com.work.SkillClash.service.MainOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class MainOperationsController {
     MainOperationService mainOperationService;
 
     @GetMapping("/getQue")
-    public ResponseEntity<List<QuestionsModel>> getQuestions(){
-       List<QuestionsModel> listQue = mainOperationService.generateQuestions();
+    public ResponseEntity<List<QuestionResponse>> getQuestions(){
+       List<QuestionResponse> listQue = mainOperationService.generateQuestions();
         return new ResponseEntity<>(listQue,HttpStatus.OK);
     }
 

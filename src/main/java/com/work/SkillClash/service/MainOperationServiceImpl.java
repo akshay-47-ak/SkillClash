@@ -1,5 +1,6 @@
 package com.work.SkillClash.service;
 
+import com.work.SkillClash.dto.QuestionResponse;
 import com.work.SkillClash.model.Options;
 import com.work.SkillClash.model.QuestionsModel;
 import org.springframework.stereotype.Service;
@@ -24,10 +25,16 @@ public class MainOperationServiceImpl implements MainOperationService{
             .build();
 
     @Override
-    public List<QuestionsModel> generateQuestions() {
-        List<QuestionsModel> listOfQue = new ArrayList<>();
+    public List<QuestionResponse> generateQuestions() {
+        List<QuestionResponse> listOfQue = new ArrayList<>();
 
-        listOfQue.add(questionsModel);
+        QuestionResponse queRes = QuestionResponse.builder()
+                .id(questionsModel.getId())
+                .questionText(questionsModel.getQuestionText())
+                .optionsList(questionsModel.getOptionsList())
+                .build();
+
+        listOfQue.add(queRes);
 
         return listOfQue;
     }
