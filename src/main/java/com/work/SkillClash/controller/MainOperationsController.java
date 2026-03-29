@@ -1,7 +1,7 @@
 package com.work.SkillClash.controller;
 
-import com.work.SkillClash.dto.QuestionResponse;
-import com.work.SkillClash.model.QuestionsModel;
+import com.work.SkillClash.dto.AnswerResponse;
+import com.work.SkillClash.dto.QuestionRequest;
 import com.work.SkillClash.service.MainOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,17 +18,22 @@ public class MainOperationsController {
     MainOperationService mainOperationService;
 
     @GetMapping("/getQue")
-    public ResponseEntity<List<QuestionResponse>> getQuestions(){
-       List<QuestionResponse> listQue = mainOperationService.generateQuestions();
+    public ResponseEntity<List<QuestionRequest>> getQuestions(){
+       List<QuestionRequest> listQue = mainOperationService.generateQuestions();
         return new ResponseEntity<>(listQue,HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<String> sendAns(@RequestBody String qId,String ans){
+    @PostMapping("/sendAns")
+    public ResponseEntity<String> sendAns(@RequestBody AnswerResponse answerResponse){
 
-        boolean isCorrect = mainOperationService.checkAnsCorrect(qId,ans);
+              String ans = answerResponse.getAns();
 
-        return new ResponseEntity("Correct",HttpStatus.OK);
+        boolean isCorrect = mainOperationService.checkAnsCorrect(ans);
+        if(isCorrect){
+            return new ResponseEntity("Correct",HttpStatus.OK);
+        }
+
+        return new ResponseEntity("Wrong",HttpStatus.NOT_FOUND);
     }
 
 }

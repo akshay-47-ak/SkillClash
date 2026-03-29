@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class QuestionResponse {
+public class QuestionRequest {
 
     private String id;
     private String questionText;

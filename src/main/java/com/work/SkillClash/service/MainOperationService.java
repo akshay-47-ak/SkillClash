@@ -1,12 +1,11 @@
 package com.work.SkillClash.service;
 
-import com.work.SkillClash.dto.QuestionResponse;
-import com.work.SkillClash.model.QuestionsModel;
+import com.work.SkillClash.dto.QuestionRequest;
 
 import java.util.List;
 
 public interface MainOperationService {
-    List<QuestionResponse> generateQuestions();
+    List<QuestionRequest> generateQuestions();
 
-    boolean checkAnsCorrect(String qId, String ans);
+    boolean checkAnsCorrect(String ans);
 }
