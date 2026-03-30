@@ -50,9 +50,18 @@ public class MainOperationServiceImpl implements MainOperationService{
     }
 
     @Override
-    public int checkAnsCorrect(List<AnswerResponse> listAns) {
-               int count =0;
-         for( QuestionsModel que: queList){
+    public int checkAnsCorrect(Map<String,String> ansMap) {
+
+        int count =0;
+        for(QuestionsModel que: queList){
+           String ans =  ansMap.get(que.getId());
+           if(que.getAnswer().equals(ans)){
+               count++;
+           }
+        }
+
+
+    /*     for( QuestionsModel que: queList){
              for(AnswerResponse ans : listAns){
                  String que1 = ans.getQId().toString();
                  String ans1 = ans.getAns().toString();
@@ -62,7 +71,7 @@ public class MainOperationServiceImpl implements MainOperationService{
                      }
                  }
              }
-         }
+         }*/
 
         return count;
     }

@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/main")
@@ -25,10 +27,13 @@ public class MainOperationsController {
 
     @PostMapping("/sendAns")
     public ResponseEntity<Integer> sendAns(@RequestBody List<AnswerResponse> answerResponse){
+        Map<String,String> ansMap = new HashMap<>();
+        for (AnswerResponse ansRes: answerResponse){
+                   ansMap.put(ansRes.getQId(),ansRes.getAns());
+        }
 
 
-
-        int isCorrect = mainOperationService.checkAnsCorrect(answerResponse);
+        int isCorrect = mainOperationService.checkAnsCorrect(ansMap);
         if(isCorrect>0){
             return new ResponseEntity(isCorrect,HttpStatus.OK);
         }
