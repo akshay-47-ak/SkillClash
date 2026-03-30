@@ -1,5 +1,6 @@
 package com.work.SkillClash.service;
 
+import com.work.SkillClash.dto.AnswerResponse;
 import com.work.SkillClash.dto.QuestionRequest;
 import com.work.SkillClash.model.Options;
 import com.work.SkillClash.model.QuestionsModel;
@@ -21,21 +22,16 @@ public class MainOperationServiceImpl implements MainOperationService{
             new Options("A","Java Virtual Machine"),
             new Options("B","Java VISION MACHINE")
     );
-
     List<Options> options2 = List.of(
             new Options("A","Wrapper Class"),
             new Options("B","DataType")
     );
-
 
     List<QuestionsModel> queList = List.of(
             new QuestionsModel("q1","What is JVM",options1,"A"),
             new QuestionsModel("q2","What is Integer",options2,"B")
 
     );
-
-
-
 
 
     @Override
@@ -54,12 +50,20 @@ public class MainOperationServiceImpl implements MainOperationService{
     }
 
     @Override
-    public boolean checkAnsCorrect(String qId,String ans) {
+    public int checkAnsCorrect(List<AnswerResponse> listAns) {
+               int count =0;
+         for( QuestionsModel que: queList){
+             for(AnswerResponse ans : listAns){
+                 String que1 = ans.getQId().toString();
+                 String ans1 = ans.getAns().toString();
+                 if(que1.equals(que.getId())){
+                     if(ans1.equals(que.getAnswer())){
+                         count++;
+                     }
+                 }
+             }
+         }
 
-           String Correctans = ansMap.get(qId);
-           if(ans.equals(Correctans)){
-               return true;
-           }
-        return false;
+        return count;
     }
 }

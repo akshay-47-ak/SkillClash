@@ -24,17 +24,16 @@ public class MainOperationsController {
     }
 
     @PostMapping("/sendAns")
-    public ResponseEntity<String> sendAns(@RequestBody AnswerResponse answerResponse){
+    public ResponseEntity<Integer> sendAns(@RequestBody List<AnswerResponse> answerResponse){
 
-              String ans = answerResponse.getAns();
-              String qId = answerResponse.getQId();
 
-        boolean isCorrect = mainOperationService.checkAnsCorrect(qId,ans);
-        if(isCorrect){
-            return new ResponseEntity("Correct",HttpStatus.OK);
+
+        int isCorrect = mainOperationService.checkAnsCorrect(answerResponse);
+        if(isCorrect>0){
+            return new ResponseEntity(isCorrect,HttpStatus.OK);
         }
 
-        return new ResponseEntity("Wrong",HttpStatus.NOT_FOUND);
+        return new ResponseEntity(0,HttpStatus.OK);
     }
 
 }
