@@ -28,47 +28,34 @@ public class MainOperationServiceImpl implements MainOperationService{
     );
 
 
-    QuestionsModel questionsModel = QuestionsModel.builder()
-            .id("q1")
-            .questionText("What is JVM")
-            .optionsList(options1)
-            .answer("A")
-            .build();
-    QuestionsModel questionsModel1 = QuestionsModel.builder()
-            .id("q2")
-            .questionText("What is Integer")
-            .optionsList(options2)
-            .answer("A")
-            .build();
+    List<QuestionsModel> queList = List.of(
+            new QuestionsModel("q1","What is JVM",options1,"A"),
+            new QuestionsModel("q2","What is Integer",options2,"B")
+
+    );
+
+
 
 
 
     @Override
     public List<QuestionRequest> generateQuestions() {
 
+        for(QuestionsModel que : queList){
+            QuestionRequest req = new QuestionRequest();
+            req.setId(que.getId());
+            req.setQuestionText(que.getQuestionText());
+            req.setOptionsList(que.getOptionsList());
 
-        QuestionRequest queRes = QuestionRequest.builder()
-                .id(questionsModel.getId())
-                .questionText(questionsModel.getQuestionText())
-                .optionsList(questionsModel.getOptionsList())
-                .build();
-
-        QuestionRequest queRes1 = QuestionRequest.builder()
-                .id(questionsModel1.getId())
-                .questionText(questionsModel1.getQuestionText())
-                .optionsList(questionsModel1.getOptionsList())
-                .build();
-
-
-        listOfQue.add(queRes);
+            listOfQue.add(req);
+        }
 
         return listOfQue;
     }
 
     @Override
     public boolean checkAnsCorrect(String qId,String ans) {
-        ansMap.put(questionsModel.getId(),questionsModel.getAnswer());
-        ansMap.put(questionsModel1.getId(),questionsModel1.getAnswer());
+
            String Correctans = ansMap.get(qId);
            if(ans.equals(Correctans)){
                return true;
