@@ -1,9 +1,8 @@
 package com.work.SkillClash.service;
 
-import com.work.SkillClash.dto.AnswerResponse;
 import com.work.SkillClash.dto.QuestionRequest;
 import com.work.SkillClash.model.Options;
-import com.work.SkillClash.model.QuestionsModel;
+import com.work.SkillClash.model.Questions;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,9 +26,9 @@ public class MainOperationServiceImpl implements MainOperationService{
             new Options("B","DataType")
     );
 
-    List<QuestionsModel> queList = List.of(
-            new QuestionsModel("q1","What is JVM",options1,"A"),
-            new QuestionsModel("q2","What is Integer",options2,"B")
+    List<Questions> queList = List.of(
+            new Questions("q1","What is JVM",options1,"A"),
+            new Questions("q2","What is Integer",options2,"B")
 
     );
 
@@ -37,7 +36,7 @@ public class MainOperationServiceImpl implements MainOperationService{
     @Override
     public List<QuestionRequest> generateQuestions() {
 
-        for(QuestionsModel que : queList){
+        for(Questions que : queList){
             QuestionRequest req = new QuestionRequest();
             req.setId(que.getId());
             req.setQuestionText(que.getQuestionText());
@@ -53,7 +52,7 @@ public class MainOperationServiceImpl implements MainOperationService{
     public int checkAnsCorrect(Map<String,String> ansMap) {
 
         int count =0;
-        for(QuestionsModel que: queList){
+        for(Questions que: queList){
            String ans =  ansMap.get(que.getId());
            if(que.getAnswer().equals(ans)){
                count++;
@@ -61,7 +60,7 @@ public class MainOperationServiceImpl implements MainOperationService{
         }
 
 
-    /*     for( QuestionsModel que: queList){
+    /*     for( Questions que: queList){
              for(AnswerResponse ans : listAns){
                  String que1 = ans.getQId().toString();
                  String ans1 = ans.getAns().toString();
