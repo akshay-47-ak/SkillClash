@@ -19,7 +19,7 @@ public class Option {
 
     private String optionText;
 
-    @Column(name = "option_key", nullable = false, unique = true)
+    @Column(name = "option_key", nullable = false)
     private String option_key;
 
     @ManyToOne(fetch = FetchType.LAZY)
