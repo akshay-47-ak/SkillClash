@@ -1,6 +1,6 @@
 package com.work.SkillClash.dto;
 
-import com.work.SkillClash.model.Options;
+import com.work.SkillClash.model.Option;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +16,6 @@ public class QuestionRequest {
 
     private String id;
     private String questionText;
-    private List<Options> optionsList;
+    private List<Option> optionList;
 
 }

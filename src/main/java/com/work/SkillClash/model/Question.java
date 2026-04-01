@@ -7,23 +7,25 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 @Entity
-public class Options {
+public class Question {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String opId;
+    private String id;
 
-    private String optionText;
-
-    private String option_key;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "questions_id",nullable = false,foreignKey = @ForeignKey(name = "fk_questions_id "))
+    private String questionText;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
-    private Questions questions;
+    private List<Option> optionList;
+
+    //We Have To Define a Logic For Ans
+    private String answer;
 
 }
