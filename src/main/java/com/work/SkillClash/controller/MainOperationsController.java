@@ -2,6 +2,7 @@ package com.work.SkillClash.controller;
 
 import com.work.SkillClash.dto.AnswerResponse;
 import com.work.SkillClash.dto.QuestionRequest;
+import com.work.SkillClash.dto.QuestionResponse;
 import com.work.SkillClash.service.MainOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,19 @@ public class MainOperationsController {
     @Autowired
     MainOperationService mainOperationService;
 
+    @PostMapping("/generateQuestion")
+    public ResponseEntity<String> generateQuestions(
+            @RequestBody List<QuestionResponse> queResponse
+    ){
+
+        boolean generated = mainOperationService.generateQuestion(queResponse);
+
+        return new ResponseEntity<>("Question Genereated",HttpStatus.OK);
+    }
+
     @GetMapping("/getQue")
     public ResponseEntity<List<QuestionRequest>> getQuestions(){
-       List<QuestionRequest> listQue = mainOperationService.generateQuestions();
+       List<QuestionRequest> listQue = mainOperationService.getQuestions;
         return new ResponseEntity<>(listQue,HttpStatus.OK);
     }
 
