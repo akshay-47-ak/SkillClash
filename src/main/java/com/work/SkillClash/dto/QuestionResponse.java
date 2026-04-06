@@ -17,6 +17,6 @@ public class QuestionResponse {
     private String id;
     private String questionText;
     private List<Option> optionList;
-    private String answer;
+
 
 }

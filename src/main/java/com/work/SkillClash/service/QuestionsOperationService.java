@@ -9,5 +9,6 @@ public interface QuestionsOperationService {
 
     public List<QuestionResponse> generateQuestion(List<QuestionRequest> queResponse);
 
+    public List<QuestionResponse> getQuestions();
 
 }

@@ -53,13 +53,20 @@ public class QuestionsOperationServiceImpl implements QuestionsOperationService 
         return listResp;
     }
 
+    @Override
+    public List<QuestionResponse> getQuestions() {
+
+        List<Question> listQues = mainRepository.findAll();
+
+        return List.of();
+    }
+
     private QuestionResponse mapToResponse(Question savedQues) {
 
         QuestionResponse questionResponse =QuestionResponse.builder()
                 .id(savedQues.getId())
                 .questionText(savedQues.getQuestionText())
                 .optionList(savedQues.getOptionList())
-                .answer(savedQues.getAnswer())
                 .build();
 
         return questionResponse;
