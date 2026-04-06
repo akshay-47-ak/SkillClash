@@ -58,7 +58,19 @@ public class QuestionsOperationServiceImpl implements QuestionsOperationService 
 
         List<Question> listQues = mainRepository.findAll();
 
-        return List.of();
+        List<QuestionResponse> listResp = new ArrayList<>();
+
+        for (Question que: listQues){
+            QuestionResponse questionResponse = QuestionResponse.builder()
+                    .id(que.getId())
+                    .questionText(que.getQuestionText())
+                    .optionList(que.getOptionList())
+                    .build();
+
+            listResp.add(questionResponse);
+        }
+
+        return listResp;
     }
 
     private QuestionResponse mapToResponse(Question savedQues) {

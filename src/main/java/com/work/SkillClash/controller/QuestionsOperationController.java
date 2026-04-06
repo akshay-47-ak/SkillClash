@@ -29,7 +29,6 @@ public class QuestionsOperationController {
 
     @GetMapping("/getQue")
     public ResponseEntity<List<QuestionResponse>> getQuestions(){
-
         List<QuestionResponse> listQue = questionsOperationService.getQuestions();
         return new ResponseEntity<>(listQue,HttpStatus.OK);
     }
