@@ -32,7 +32,8 @@ public class MainOperationsController {
 
     @GetMapping("/getQue")
     public ResponseEntity<List<QuestionRequest>> getQuestions(){
-       List<QuestionRequest> listQue = mainOperationService.getQuestions;
+        QuestionRequest q = null;
+        List<QuestionRequest> listQue = List.of(q);
         return new ResponseEntity<>(listQue,HttpStatus.OK);
     }
 
