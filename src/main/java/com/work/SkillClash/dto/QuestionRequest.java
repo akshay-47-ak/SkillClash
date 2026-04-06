@@ -14,8 +14,8 @@ import java.util.List;
 @Builder
 public class QuestionRequest {
 
-    private String id;
     private String questionText;
     private List<Option> optionList;
+    private String answer;
 
 }

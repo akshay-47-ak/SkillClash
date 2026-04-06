@@ -1,5 +1,6 @@
 package com.work.SkillClash.service;
 
+import com.work.SkillClash.dto.QuestionRequest;
 import com.work.SkillClash.dto.QuestionResponse;
 import com.work.SkillClash.model.Option;
 import com.work.SkillClash.model.Question;
@@ -18,11 +19,11 @@ public class MainOperationServiceImpl implements MainOperationService{
     MainRepository mainRepository;
 
     @Override
-    public List<QuestionResponse> generateQuestion(List<QuestionResponse> queResponse) {
+    public List<QuestionResponse> generateQuestion(List<QuestionRequest> queResponse) {
 
         List<QuestionResponse> listResp = new ArrayList<>();
 
-        for(QuestionResponse q : queResponse){
+        for(QuestionRequest q : queResponse){
 
             Question question = Question.builder()
                     .questionText(q.getQuestionText())
@@ -37,8 +38,11 @@ public class MainOperationServiceImpl implements MainOperationService{
                            .optionText(op.getOptionText())
                            .question(question)
                            .build();
+
+                   options.add(option);
                }
 
+               question.setOptionList(options);
             }
           Question savedQues = mainRepository.save(question);
 

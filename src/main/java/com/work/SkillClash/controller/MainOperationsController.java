@@ -22,10 +22,10 @@ public class MainOperationsController {
 
     @PostMapping("/generateQuestion")
     public ResponseEntity<List<QuestionResponse>> generateQuestions(
-            @RequestBody List<QuestionResponse> queResponse
+            @RequestBody List<QuestionRequest> queRequest
     ){
 
-   List<QuestionResponse> questionList = mainOperationService.generateQuestion(queResponse);
+   List<QuestionResponse> questionList = mainOperationService.generateQuestion(queRequest);
 
         return new ResponseEntity<>(questionList,HttpStatus.OK);
     }

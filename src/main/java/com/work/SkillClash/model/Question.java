@@ -21,6 +21,7 @@ public class Question {
     private String id;
 
     private String questionText;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL,orphanRemoval = true)
     @JsonIgnore
     private List<Option> optionList;
