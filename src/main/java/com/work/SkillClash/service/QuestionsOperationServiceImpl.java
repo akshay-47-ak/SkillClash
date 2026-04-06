@@ -10,10 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Service
-public class MainOperationServiceImpl implements MainOperationService{
+public class QuestionsOperationServiceImpl implements QuestionsOperationService {
 
     @Autowired
     MainRepository mainRepository;
@@ -67,9 +66,5 @@ public class MainOperationServiceImpl implements MainOperationService{
     }
 
 
-    @Override
-    public int checkAnsCorrect(Map<String, String> ansMap) {
-        return 0;
-    }
 
 }
