@@ -21,13 +21,13 @@ public class MainOperationsController {
     MainOperationService mainOperationService;
 
     @PostMapping("/generateQuestion")
-    public ResponseEntity<String> generateQuestions(
+    public ResponseEntity<List<QuestionResponse>> generateQuestions(
             @RequestBody List<QuestionResponse> queResponse
     ){
 
-        boolean generated = mainOperationService.generateQuestion(queResponse);
+   List<QuestionResponse> questionList = mainOperationService.generateQuestion(queResponse);
 
-        return new ResponseEntity<>("Question Genereated",HttpStatus.OK);
+        return new ResponseEntity<>(questionList,HttpStatus.OK);
     }
 
     @GetMapping("/getQue")

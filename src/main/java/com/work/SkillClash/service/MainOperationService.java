@@ -9,7 +9,7 @@ import java.util.Map;
 
 public interface MainOperationService {
 
-    boolean generateQuestion(List<QuestionResponse> queResponse);
+    public List<QuestionResponse> generateQuestion(List<QuestionResponse> queResponse);
 
     int checkAnsCorrect(Map<String, String> ansMap);
 

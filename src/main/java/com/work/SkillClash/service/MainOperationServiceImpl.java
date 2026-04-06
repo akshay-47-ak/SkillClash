@@ -18,7 +18,9 @@ public class MainOperationServiceImpl implements MainOperationService{
     MainRepository mainRepository;
 
     @Override
-    public boolean generateQuestion(List<QuestionResponse> queResponse) {
+    public List<QuestionResponse> generateQuestion(List<QuestionResponse> queResponse) {
+
+        List<QuestionResponse> listResp = new ArrayList<>();
 
         for(QuestionResponse q : queResponse){
 
@@ -26,7 +28,6 @@ public class MainOperationServiceImpl implements MainOperationService{
                     .questionText(q.getQuestionText())
                     .answer(q.getAnswer())
                     .build();
-
             if(q.getOptionList() !=null){
                List<Option> options = new ArrayList<>();
 
@@ -39,13 +40,28 @@ public class MainOperationServiceImpl implements MainOperationService{
                }
 
             }
+          Question savedQues = mainRepository.save(question);
 
-            mainRepository.save(question);
+          QuestionResponse queResp = mapToResponse(savedQues);
 
+          listResp.add(queResp);
         }
 
-        return false;
+        return listResp;
     }
+
+    private QuestionResponse mapToResponse(Question savedQues) {
+
+        QuestionResponse questionResponse =QuestionResponse.builder()
+                .id(savedQues.getId())
+                .questionText(savedQues.getQuestionText())
+                .optionList(savedQues.getOptionList())
+                .answer(savedQues.getAnswer())
+                .build();
+
+        return questionResponse;
+    }
+
 
     @Override
     public int checkAnsCorrect(Map<String, String> ansMap) {
