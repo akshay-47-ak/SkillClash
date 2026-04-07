@@ -29,6 +29,8 @@ public class Room {
    @OneToMany(mappedBy = "room",cascade = CascadeType.ALL,orphanRemoval = true)
    private List<RoomMember> roomMemberList;
 
-   private String hostId;
+    @ManyToOne
+    @JoinColumn(name = "host_id")
+    private RoomMember host;
 
 }
