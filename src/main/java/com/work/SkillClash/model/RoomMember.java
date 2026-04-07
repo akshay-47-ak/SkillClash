@@ -21,16 +21,16 @@ public class RoomMember {
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id",nullable = false,foreignKey = @ForeignKey(name = "fk_room_id"))
+    @JoinColumn(name = "room_id",nullable = false,foreignKey = @ForeignKey(name = "fk_memeber_roomid"))
     @JsonIgnore
     private Room room;
 
     private String  username;
 
     @Enumerated(EnumType.STRING)
-    private String role;
+    private MemberRole role;
 
-    private String score;
+    private int score;
 
     @CreationTimestamp
     private LocalDateTime joinedAt;
