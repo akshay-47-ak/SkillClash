@@ -4,7 +4,7 @@ import com.work.SkillClash.dto.QuestionRequest;
 import com.work.SkillClash.dto.QuestionResponse;
 import com.work.SkillClash.model.Option;
 import com.work.SkillClash.model.Question;
-import com.work.SkillClash.repository.MainRepository;
+import com.work.SkillClash.repository.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionsOperationServiceImpl implements QuestionsOperationService {
 
     @Autowired
-    MainRepository mainRepository;
+    QuestionsRepository questionsRepository;
 
     @Override
     public List<QuestionResponse> generateQuestion(List<QuestionRequest> queResponse) {
@@ -43,7 +43,7 @@ public class QuestionsOperationServiceImpl implements QuestionsOperationService 
 
                question.setOptionList(options);
             }
-          Question savedQues = mainRepository.save(question);
+          Question savedQues = questionsRepository.save(question);
 
           QuestionResponse queResp = mapToResponse(savedQues);
 
@@ -56,7 +56,7 @@ public class QuestionsOperationServiceImpl implements QuestionsOperationService 
     @Override
     public List<QuestionResponse> getQuestions() {
 
-        List<Question> listQues = mainRepository.findAll();
+        List<Question> listQues = questionsRepository.findAll();
 
         List<QuestionResponse> listResp = new ArrayList<>();
 
