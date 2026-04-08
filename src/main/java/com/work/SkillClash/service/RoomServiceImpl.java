@@ -28,6 +28,7 @@ public class RoomServiceImpl implements RoomService {
                       .room(room)
                       .build();
 
+
         room.setHost(roomMember);
         room.setRoomMemberList(List.of(roomMember));
 
