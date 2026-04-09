@@ -19,19 +19,22 @@ public class RoomServiceImpl implements RoomService {
                 .status(RoomStatus.LIVE)
                 .build();
 
-        RoomMember rm = roomRequest.getRoomMemberList().get(0);
+              roomRepository.save(room);
+
+
               RoomMember roomMember = RoomMember.builder()
-                      .score(rm.getScore())
+                      .score(0)
                       .role(MemberRole.HOST)
-                      .username(rm.getUsername())
+                      .username(roomRequest.getUsername())
                       .room(room)
                       .build();
 
+              roomMemberRepository.save(roomMember);
 
-        room.setHost(roomMember);
-        room.setRoomMemberList(List.of(roomMember));
 
-       Room saveRoom = roomRepository.save(room);
+        room.setHost(roomMember.getId());
+        roomRepository.save(room);
+
 
         return "";
     }

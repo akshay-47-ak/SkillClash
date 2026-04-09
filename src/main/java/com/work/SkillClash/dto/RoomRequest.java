@@ -7,13 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class RoomRequest {
 
-    private List<RoomMember> roomMemberList;
+  private String username;
 
 }
