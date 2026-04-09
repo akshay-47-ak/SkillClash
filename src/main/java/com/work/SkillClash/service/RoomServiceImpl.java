@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
-   RoomRepository roomRepository;
-   RoomMemberRepository roomMemberRepository;
+  private final RoomRepository roomRepository;
+  private final RoomMemberRepository roomMemberRepository;
 
     @Override
     public String createRooms(RoomRequest roomRequest) {

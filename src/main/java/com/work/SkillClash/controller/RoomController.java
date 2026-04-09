@@ -17,7 +17,7 @@ public class RoomController {
     @Autowired
     RoomService roomService;
 
-    @PostMapping("/createRoom")
+    @PostMapping("/create")
     public ResponseEntity<String> createRoom(
             @RequestBody RoomRequest roomRequest
             ){
@@ -25,6 +25,14 @@ public class RoomController {
             String roomId = roomService.createRooms(roomRequest);
 
             return new ResponseEntity<>(roomId, HttpStatus.OK);
-               }
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<String> joinRoom(
+
+    ){
+
+        return new ResponseEntity<>("Joined",HttpStatus.OK);
+    }
 
 }
