@@ -5,12 +5,17 @@ import com.work.SkillClash.model.MemberRole;
 import com.work.SkillClash.model.Room;
 import com.work.SkillClash.model.RoomMember;
 import com.work.SkillClash.model.RoomStatus;
+import com.work.SkillClash.repository.RoomMemberRepository;
+import com.work.SkillClash.repository.RoomRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class RoomServiceImpl implements RoomService {
 
-
+   RoomRepository roomRepository;
+   RoomMemberRepository roomMemberRepository;
 
     @Override
     public String createRooms(RoomRequest roomRequest) {
