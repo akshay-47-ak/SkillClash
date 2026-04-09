@@ -1,7 +1,6 @@
 package com.work.SkillClash.service;
 
 
-import com.work.SkillClash.dto.AnswerResponse;
 import com.work.SkillClash.model.Question;
 import com.work.SkillClash.repository.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,6 @@ package com.work.SkillClash.service;
 import com.work.SkillClash.dto.RoomRequest;
 import com.work.SkillClash.model.MemberRole;
 import com.work.SkillClash.model.Room;
-import com.work.SkillClash.model.RoomMember;
 import com.work.SkillClash.model.RoomStatus;
 
 import java.util.ArrayList;
