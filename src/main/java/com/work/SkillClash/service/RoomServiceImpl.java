@@ -36,6 +36,6 @@ public class RoomServiceImpl implements RoomService {
         roomRepository.save(room);
 
 
-        return "";
+        return room.getId();
     }
 }
