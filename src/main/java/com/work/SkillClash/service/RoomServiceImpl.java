@@ -38,7 +38,7 @@ public class RoomServiceImpl implements RoomService {
 
 
         room.setHost(roomMember.getId());
-        roomRepository.save(room);
+      room =  roomRepository.save(room);
 
 
         return room.getId();
