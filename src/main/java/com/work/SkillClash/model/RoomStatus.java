@@ -1,7 +1,7 @@
 package com.work.SkillClash.model;
 
 public enum RoomStatus {
-    WATING,
+    WATTING,
     LIVE,
     FINISHED
 }

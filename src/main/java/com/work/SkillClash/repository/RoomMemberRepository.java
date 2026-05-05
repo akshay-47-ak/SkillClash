@@ -4,4 +4,7 @@ import com.work.SkillClash.model.RoomMember;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoomMemberRepository extends JpaRepository<RoomMember,String> {
+    RoomMember findByUserName(String userName);
+    boolean existsByRoomIdAndUsername(String roomId ,String userName);
+
 }
