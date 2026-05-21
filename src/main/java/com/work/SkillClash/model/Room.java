@@ -17,7 +17,6 @@ import java.util.List;
 @Builder
 public class Room {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @Enumerated(EnumType.STRING)

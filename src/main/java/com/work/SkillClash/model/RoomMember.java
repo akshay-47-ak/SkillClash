@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 @Builder
 public class RoomMember {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @ManyToOne(fetch = FetchType.LAZY)
