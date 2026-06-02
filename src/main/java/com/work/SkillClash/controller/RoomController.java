@@ -1,5 +1,6 @@
 package com.work.SkillClash.controller;
 
+import com.work.SkillClash.dto.JoinRequest;
 import com.work.SkillClash.dto.RoomRequest;
 import com.work.SkillClash.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,10 +30,12 @@ public class RoomController {
 
     @PostMapping("/join")
     public ResponseEntity<String> joinRoom(
+            @RequestBody JoinRequest joinRequest
+            ){
 
-    ){
+        String status = roomService.joinRoom(joinRequest);
 
-        return new ResponseEntity<>("Joined",HttpStatus.OK);
+        return new ResponseEntity<>(status,HttpStatus.OK);
     }
 
 
