@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "options")
 public class Option {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String opId;
 
     private String optionText;

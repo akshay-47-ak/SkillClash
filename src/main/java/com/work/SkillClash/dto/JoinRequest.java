@@ -12,5 +12,6 @@ public class JoinRequest {
 
     String roomId;
     String userName;
+    String roomCode;
 
 }

@@ -19,11 +19,17 @@ public class RoomServiceImpl implements RoomService {
 
   private final RoomRepository roomRepository;
   private final RoomMemberRepository roomMemberRepository;
+  private final RoomCodeGenerator roomCodeGenerator;
 
     @Override
     public String createRooms(RoomRequest roomRequest) {
 
+        int temp = roomRepository.findAll().size()+1;
+        String roomCode= String.format("RC%08d",temp);
+
+
         Room room = Room.builder()
+                .roomCode(roomCodeGenerator.generateRoomCode())
                 .status(RoomStatus.LIVE)
                 .build();
 
@@ -58,7 +64,7 @@ public class RoomServiceImpl implements RoomService {
            }
 
            boolean exist = roomMemberRepository.existsByRoomIdAndUsername(
-                   joinRequest.getRoomId(),joinRequest.getUserName());
+                   joinRequest.getRoomCode(),joinRequest.getUserName());
 
            if(exist){
                throw new RuntimeException("Room Member Already Joined");

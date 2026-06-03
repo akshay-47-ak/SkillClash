@@ -17,7 +17,11 @@ import java.util.List;
 @Builder
 public class Room {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @Column(unique = true)
+    private String roomCode;
 
     @Enumerated(EnumType.STRING)
     private RoomStatus status;
