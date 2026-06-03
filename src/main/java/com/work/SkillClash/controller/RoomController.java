@@ -6,10 +6,9 @@ import com.work.SkillClash.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/room")
@@ -37,6 +36,16 @@ public class RoomController {
 
         return new ResponseEntity<>(status,HttpStatus.OK);
     }
+
+    @GetMapping("/getRoomMemebrs")
+    public ResponseEntity<List<String>> getListOfRoomMember(
+            @RequestBody String roomId) {
+
+        List<String> listOfRoomMembers = roomService.getRoomMembers(roomId);
+
+        return new ResponseEntity<>(listOfRoomMembers,HttpStatus.OK);
+    }
+
 
 
 }

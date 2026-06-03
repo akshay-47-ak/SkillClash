@@ -11,6 +11,7 @@ import com.work.SkillClash.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,5 +81,13 @@ public class RoomServiceImpl implements RoomService {
         roomMemberRepository.save(member);
 
         return room.getId();
+    }
+
+    @Override
+    public List<String> getRoomMembers(String roomId) {
+
+        List<String> listOfMembers = roomMemberRepository.getRoomMembersNamesByRoomId(roomId);
+
+        return listOfMembers;
     }
 }
