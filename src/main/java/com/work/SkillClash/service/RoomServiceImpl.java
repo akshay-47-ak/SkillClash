@@ -90,6 +90,9 @@ public class RoomServiceImpl implements RoomService {
 
        List<RoomMember> listOfMembers = roomMemberRepository.findByRoomId(roomId);
 
+       if(listOfMembers.isEmpty()){
+           throw new RuntimeException("No Room Members Joined Yet.");
+       }
        List<RoomMemberResponse> resultList = new ArrayList<>();
 
         for(RoomMember rm : listOfMembers){

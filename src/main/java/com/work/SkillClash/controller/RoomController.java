@@ -39,7 +39,7 @@ public class RoomController {
         return new ResponseEntity<>(status,HttpStatus.OK);
     }
 
-    @GetMapping("/getRoomMemebrs/{roomId}")
+    @GetMapping("/{roomId}/members")
     public ResponseEntity<List<RoomMemberResponse>> getListOfRoomMember(
             @PathVariable String roomId) {
 
