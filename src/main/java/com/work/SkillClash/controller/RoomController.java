@@ -1,7 +1,9 @@
 package com.work.SkillClash.controller;
 
 import com.work.SkillClash.dto.JoinRequest;
+import com.work.SkillClash.dto.RoomMemberResponse;
 import com.work.SkillClash.dto.RoomRequest;
+import com.work.SkillClash.model.RoomMember;
 import com.work.SkillClash.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,11 +39,11 @@ public class RoomController {
         return new ResponseEntity<>(status,HttpStatus.OK);
     }
 
-    @GetMapping("/getRoomMemebrs")
-    public ResponseEntity<List<String>> getListOfRoomMember(
-            @RequestBody String roomId) {
+    @GetMapping("/getRoomMemebrs/{roomId}")
+    public ResponseEntity<List<RoomMemberResponse>> getListOfRoomMember(
+            @PathVariable String roomId) {
 
-        List<String> listOfRoomMembers = roomService.getRoomMembers(roomId);
+        List<RoomMemberResponse> listOfRoomMembers = roomService.getRoomMembers(roomId);
 
         return new ResponseEntity<>(listOfRoomMembers,HttpStatus.OK);
     }

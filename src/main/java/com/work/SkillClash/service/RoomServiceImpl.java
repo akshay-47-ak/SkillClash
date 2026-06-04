@@ -1,6 +1,7 @@
 package com.work.SkillClash.service;
 
 import com.work.SkillClash.dto.JoinRequest;
+import com.work.SkillClash.dto.RoomMemberResponse;
 import com.work.SkillClash.dto.RoomRequest;
 import com.work.SkillClash.model.MemberRole;
 import com.work.SkillClash.model.Room;
@@ -11,6 +12,7 @@ import com.work.SkillClash.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,10 +86,22 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public List<String> getRoomMembers(String roomId) {
+    public List<RoomMemberResponse> getRoomMembers(String roomId) {
 
-        List<String> listOfMembers = roomMemberRepository.getRoomMembersNamesByRoomId(roomId);
+       List<RoomMember> listOfMembers = roomMemberRepository.findByRoomId(roomId);
 
-        return listOfMembers;
+       List<RoomMemberResponse> resultList = new ArrayList<>();
+
+        for(RoomMember rm : listOfMembers){
+            RoomMemberResponse rms = RoomMemberResponse.builder()
+                    .id(rm.getId())
+                    .username(rm.getUsername())
+                    .role(rm.getRole())
+                    .score(rm.getScore())
+                    .build();
+            resultList.add(rms);
+        }
+
+        return resultList;
     }
 }
