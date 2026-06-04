@@ -45,7 +45,7 @@ public class RoomController {
 
         List<RoomMemberResponse> listOfRoomMembers = roomService.getRoomMembers(roomId);
 
-        return new ResponseEntity<>(listOfRoomMembers,HttpStatus.OK);
+        return  ResponseEntity.ok(listOfRoomMembers);
     }
 
 
