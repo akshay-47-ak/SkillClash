@@ -6,10 +6,9 @@ import com.work.SkillClash.model.RoomMember;
 import com.work.SkillClash.repository.RoomMemberRepository;
 import com.work.SkillClash.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
+@Service
 @RequiredArgsConstructor
 public class QuizServiceImpl implements QuizService {
 
