@@ -1,5 +1,12 @@
 package com.work.SkillClash.controller;
 
+import com.work.SkillClash.dto.StartQuizReq;
+import com.work.SkillClash.service.QuizService;
+import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -7,18 +14,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/quiz")
 public class QuizController {
 
-/*    We will Create the New Controler QuizControler
+/*
+3 Apis - StartQuiz
+    Rquest -
+    RoomCode
+    MemberId
+    */
 
-3 Apis - StartQuiz , EndQuiz , ShowResult or ShowScore
+    @Autowired
+    QuizService quizService;
 
-    StartQuiz -
-    Rquest - RoomCode
 
-    Business Logic -
-    Check RoomAvaibility
-    Check RoomMemeber > 2 -- Host and minimum 1 participent
-    update room status
+    @PostMapping("/startQuiz")
+    public ResponseEntity<String> startQuiz(
+            @RequestBody StartQuizReq startQuizReq
+            ){
 
-    Response -  Quiz Started Msg*/
+        String roomMemberId = startQuizReq.getRoomMemberId();
+
+        String roomCode = startQuizReq.getRoomCode();
+         if(roomMemberId == null && roomMemberId.isEmpty()){
+             throw new RuntimeException("RoomMemberId Is Null");
+         }
+        if(roomCode == null && roomCode.isEmpty()){
+            throw new RuntimeException("RoomCode  Is Null");
+        }
+
+        String startQuizRes = quizService.StartQuizService(roomCode,roomMemberId);
+
+            return ResponseEntity.ok(startQuizRes);
+    }
 
 }
