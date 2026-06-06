@@ -2,9 +2,10 @@ package com.work.SkillClash.service;
 
 import com.work.SkillClash.repository.AuthRepository;
 import com.work.SkillClash.repository.RoomRepository;
+import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-
+@Service
 public class UserCodeGenerator {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int CODE_LENGTH = 6;
