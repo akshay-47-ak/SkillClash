@@ -2,7 +2,9 @@ package com.work.SkillClash.service;
 
 
 import com.work.SkillClash.model.MemberRole;
+import com.work.SkillClash.model.Room;
 import com.work.SkillClash.model.RoomMember;
+import com.work.SkillClash.model.RoomStatus;
 import com.work.SkillClash.repository.RoomMemberRepository;
 import com.work.SkillClash.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +25,18 @@ public class QuizServiceImpl implements QuizService {
          if(!isRoomExist){
              throw new RuntimeException("Room Dose Not Exists");
          }
+
         RoomMember roomMember = roomMemberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("Room member not found"));
 
          if(roomMember.getRole() != MemberRole.HOST){
              throw new RuntimeException("Only HOST Can Start The Quiz");
          }
+
+         Room room = roomRepository.findRoomByRoomCode(roomCode);
+         room.setStatus(RoomStatus.LIVE);
+
+            roomRepository.save(room);
 
         return "Quiz Started";
     }
