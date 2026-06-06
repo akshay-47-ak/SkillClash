@@ -3,10 +3,8 @@ package com.work.SkillClash.service;
 import com.work.SkillClash.dto.JoinRequest;
 import com.work.SkillClash.dto.RoomMemberResponse;
 import com.work.SkillClash.dto.RoomRequest;
-import com.work.SkillClash.model.MemberRole;
-import com.work.SkillClash.model.Room;
-import com.work.SkillClash.model.RoomMember;
-import com.work.SkillClash.model.RoomStatus;
+import com.work.SkillClash.model.*;
+import com.work.SkillClash.repository.AuthRepository;
 import com.work.SkillClash.repository.RoomMemberRepository;
 import com.work.SkillClash.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +21,7 @@ public class RoomServiceImpl implements RoomService {
   private final RoomRepository roomRepository;
   private final RoomMemberRepository roomMemberRepository;
   private final RoomCodeGenerator roomCodeGenerator;
+  private final AuthRepository authRepository;
 
     @Override
     public String createRooms(RoomRequest roomRequest) {
@@ -38,6 +37,16 @@ public class RoomServiceImpl implements RoomService {
 
         room = roomRepository.save(room);
 
+        boolean userExist = authRepository.existsByUsername(roomRequest.getUsername());
+
+        if(!userExist){
+            throw new RuntimeException("User Not Found");
+        }
+        User user = authRepository.findUserByUsername(roomRequest.getUsername());
+
+        if(user.getStatus()==UserStatus.DEACTIVE){
+            throw new RuntimeException("User Not Activated Please Active The User!!");
+        }
 
               RoomMember host = RoomMember.builder()
                       .score(0)
