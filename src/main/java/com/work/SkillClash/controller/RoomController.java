@@ -49,15 +49,4 @@ public class RoomController {
 
         return  ResponseEntity.ok(listOfRoomMembers);
     }
-
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Map<String,Object>>handleRuntimeException(
-            RuntimeException ex
-    ){
-        Map<String,Object> errorResponse = new HashMap<>();
-        errorResponse.put("error","Not Found");
-        errorResponse.put("message",ex.getMessage());
-        return ResponseEntity.ok(errorResponse);
-    }
-
 }
