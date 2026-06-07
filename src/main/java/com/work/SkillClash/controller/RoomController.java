@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/room")
@@ -48,6 +50,14 @@ public class RoomController {
         return  ResponseEntity.ok(listOfRoomMembers);
     }
 
-
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Map<String,Object>>handleRuntimeException(
+            RuntimeException ex
+    ){
+        Map<String,Object> errorResponse = new HashMap<>();
+        errorResponse.put("error","Not Found");
+        errorResponse.put("message",ex.getMessage());
+        return ResponseEntity.ok(errorResponse);
+    }
 
 }

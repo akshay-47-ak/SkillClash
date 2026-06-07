@@ -8,11 +8,11 @@ import com.work.SkillClash.repository.AuthRepository;
 import com.work.SkillClash.repository.RoomMemberRepository;
 import com.work.SkillClash.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -40,12 +40,13 @@ public class RoomServiceImpl implements RoomService {
         boolean userExist = authRepository.existsByUsername(roomRequest.getUsername());
 
         if(!userExist){
-            throw new RuntimeException("User Not Found");
+            throw new RuntimeException("User Not Found with UserName: " + roomRequest.getUsername());
         }
         User user = authRepository.findUserByUsername(roomRequest.getUsername());
 
         if(user.getStatus()==UserStatus.DEACTIVE){
-            throw new RuntimeException("User Not Activated Please Active The User!!");
+            throw new RuntimeException("User Not Activated Please Active " +
+                    "The User With Username!!" +roomRequest.getUsername());
         }
 
               RoomMember host = RoomMember.builder()
@@ -69,17 +70,17 @@ public class RoomServiceImpl implements RoomService {
     public String joinRoom(JoinRequest joinRequest) {
 
       Room room = roomRepository.findById(joinRequest.getRoomId())
-              .orElseThrow(()-> new RuntimeException("Room Not Found"));
+              .orElseThrow(()-> new RuntimeException("Room Not Found With RoomCode :" +joinRequest.getRoomCode()));
 
            if(room.getStatus() != RoomStatus.WATTING){
-               throw new RuntimeException("Room is Alredy Started");
+               throw new RuntimeException("Room is Alredy Started With RoomCode :" +joinRequest.getRoomCode());
            }
 
            boolean exist = roomMemberRepository.existsByRoomIdAndUsername(
                    joinRequest.getRoomCode(),joinRequest.getUserName());
 
            if(exist){
-               throw new RuntimeException("Room Member Already Joined");
+               throw new RuntimeException("Room Member Already Joined With UserName :"+joinRequest.getUserName());
            }
 
         RoomMember member = RoomMember.builder()
@@ -116,4 +117,7 @@ public class RoomServiceImpl implements RoomService {
 
         return resultList;
     }
+
+
+
 }
