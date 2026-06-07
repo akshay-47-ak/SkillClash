@@ -23,6 +23,7 @@ public class User {
 
     private String email;
 
+    @Column(unique = true)
     private String userCode;
 
     private String password;
