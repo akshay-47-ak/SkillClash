@@ -22,7 +22,7 @@ public class RoomServiceImpl implements RoomService {
   private final RoomMemberRepository roomMemberRepository;
   private final RoomCodeGenerator roomCodeGenerator;
   private final AuthRepository authRepository;
-
+ private final RoomNotificationService roomNotificationService;
     @Override
     public String createRooms(RoomRequest roomRequest) {
 
@@ -91,6 +91,14 @@ public class RoomServiceImpl implements RoomService {
                 .build();
 
         roomMemberRepository.save(member);
+
+        List<RoomMemberResponse> members =
+                getRoomMembers(room.getId());
+        roomNotificationService.memberJoined(
+                room.getId(),
+                joinRequest.getUserName() + " joined room",
+                members
+        );
 
         return room.getId();
     }
