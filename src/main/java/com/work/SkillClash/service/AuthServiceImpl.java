@@ -24,10 +24,16 @@ public class AuthServiceImpl implements AuthService{
     @Override
     public UserResponse registerUser(UserRequest userRequest) {
 
+        String username = userRequest.getUsername();
+
+        if (authRepository.existsByUsername(username)) {
+            throw new RuntimeException("Username already exists with username : "+username);
+        }
+
         User user = User.builder()
                 .email(userRequest.getEmail())
                 .userCode(userCodeGenerator.generateUserCode())
-                .username(userRequest.getUsername())
+                .username(username)
                 .password(userRequest.getPassword())
                 .status(UserStatus.ACTIVE)
                 .build();
@@ -59,7 +65,7 @@ public class AuthServiceImpl implements AuthService{
             throw new RuntimeException("UserName or Password is Incorrect Please Check!!");
         }
 
-        if(user.getStatus()==UserStatus.DEACTIVE){
+        if(user.getStatus()==UserStatus.INACTIVE){
             throw new RuntimeException("User Is Not Active Please Contact With Admin");
         }
 

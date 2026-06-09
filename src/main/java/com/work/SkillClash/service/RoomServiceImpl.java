@@ -44,7 +44,7 @@ public class RoomServiceImpl implements RoomService {
         }
         User user = authRepository.findUserByUsername(roomRequest.getUsername());
 
-        if(user.getStatus()==UserStatus.DEACTIVE){
+        if(user.getStatus()==UserStatus.INACTIVE){
             throw new RuntimeException("User Not Activated Please Active " +
                     "The User With Username!!" +roomRequest.getUsername());
         }

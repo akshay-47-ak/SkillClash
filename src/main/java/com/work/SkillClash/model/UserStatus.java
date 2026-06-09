@@ -5,6 +5,6 @@ public enum UserStatus {
     ONLINE,
     OFFLINE,
     ACTIVE,
-    DEACTIVE
+    INACTIVE
 
 }
