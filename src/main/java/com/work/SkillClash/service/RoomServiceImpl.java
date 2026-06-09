@@ -63,14 +63,17 @@ public class RoomServiceImpl implements RoomService {
           roomRepository.save(room);
 
 
-        return room.getId();
+        return room.getRoomCode();
     }
 
     @Override
     public String joinRoom(JoinRequest joinRequest) {
 
-      Room room = roomRepository.findById(joinRequest.getRoomId())
-              .orElseThrow(()-> new RuntimeException("Room Not Found With RoomCode :" +joinRequest.getRoomCode()));
+      Room room = roomRepository.findRoomByRoomCode(joinRequest.getRoomCode());
+
+            if(room == null){
+                throw  new RuntimeException("Room Does not Exist by RoomCode :" + joinRequest.getRoomCode());
+            }
 
            if(room.getStatus() != RoomStatus.WATTING){
                throw new RuntimeException("Room is Alredy Started With RoomCode :" +joinRequest.getRoomCode());

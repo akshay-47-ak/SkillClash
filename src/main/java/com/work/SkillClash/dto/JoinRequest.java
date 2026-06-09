@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JoinRequest {
 
-    String roomId;
     String userName;
     String roomCode;
 
