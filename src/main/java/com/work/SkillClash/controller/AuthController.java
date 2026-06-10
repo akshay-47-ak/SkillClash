@@ -35,5 +35,15 @@ public ResponseEntity<UserResponse> createUser(
      return ResponseEntity.ok(loginRes);
 
 }
+    @PostMapping("/user/{username}/logout")
+    public ResponseEntity<String>userLogoutRequest(
+            @PathVariable String username
+    ){
+
+        String logoutReq = authService.logoutUser(username);
+
+        return ResponseEntity.ok(logoutReq);
+
+    }
 
 }

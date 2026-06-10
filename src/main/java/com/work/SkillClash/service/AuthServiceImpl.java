@@ -81,6 +81,20 @@ public class AuthServiceImpl implements AuthService{
         return  user.getUsername();
     }
 
+    @Override
+    public String logoutUser(String username) {
+
+        LoginSession loginSession =
+                logginSessionRepository.findTopByUsernameOrderByLoggedInAtDesc(username);
+        if(loginSession==null){
+            throw new RuntimeException("LoginSession is not present");
+        }
+        loginSession.setStatus(UserStatus.OFFLINE);
+       loginSession = logginSessionRepository.save(loginSession);
+
+        return "User Logout Successfully";
+    }
+
     public UserResponse mapToResponse(User savedUser){
         UserResponse userResponse = UserResponse.builder()
                 .username(savedUser.getUsername())
