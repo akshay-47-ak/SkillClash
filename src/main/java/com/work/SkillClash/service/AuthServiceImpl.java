@@ -59,11 +59,12 @@ public class AuthServiceImpl implements AuthService{
         }
 
         boolean isExist = authRepository.existsByUsername(username);
-        User user = authRepository.findUserByUsername(username);
 
-        if(!isExist && user.getPassword()!=password){
-            throw new RuntimeException("UserName or Password is Incorrect Please Check!!");
+        if(!isExist){
+            throw new RuntimeException("UserName Is Incorrect Or Not A Valid User Please Check!!");
         }
+
+        User user = authRepository.findUserByUsername(username);
 
         if(user.getStatus()==UserStatus.INACTIVE){
             throw new RuntimeException("User Is Not Active Please Contact With Admin");
@@ -77,7 +78,7 @@ public class AuthServiceImpl implements AuthService{
 
         LoginSession ls = logginSessionRepository.save(loginSession);
 
-        return "User Login Successfully";
+        return  user.getUsername();
     }
 
     public UserResponse mapToResponse(User savedUser){
