@@ -23,6 +23,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/user/register").permitAll()
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/room/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();

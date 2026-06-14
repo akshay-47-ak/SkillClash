@@ -97,6 +97,7 @@ public class RoomServiceImpl implements RoomService {
 
         List<RoomMemberResponse> members =
                 getRoomMembers(room.getId());
+
         roomNotificationService.memberJoined(
                 room.getId(),
                 joinRequest.getUserName() + " joined room",
