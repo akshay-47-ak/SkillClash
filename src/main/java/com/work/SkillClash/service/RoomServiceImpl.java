@@ -99,7 +99,7 @@ public class RoomServiceImpl implements RoomService {
                 getRoomMembers(room.getId());
 
         roomNotificationService.memberJoined(
-                room.getId(),
+                room.getRoomCode(),
                 joinRequest.getUserName() + " joined room",
                 members
         );
