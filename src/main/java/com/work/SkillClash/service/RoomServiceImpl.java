@@ -104,7 +104,7 @@ public class RoomServiceImpl implements RoomService {
                 members
         );
 
-        return room.getId();
+        return room.getRoomCode();
     }
 
     @Override
